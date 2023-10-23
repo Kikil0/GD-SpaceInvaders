@@ -1,8 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw6vrlj0pwinr"]
+[gd_scene load_steps=4 format=3 uid="uid://cw6vrlj0pwinr"]
 
 [ext_resource type="PackedScene" uid="uid://dff3lu066lwnn" path="res://Scenes/player.tscn" id="1_x16qq"]
+[ext_resource type="PackedScene" uid="uid://dkw4nqnct08k1" path="res://Scenes/Enemy.tscn" id="2_tt8ye"]
+[ext_resource type="PackedScene" uid="uid://deis1asmxsxav" path="res://Scenes/enemy_group.tscn" id="3_l2cug"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_x16qq")]
 position = Vector2(182, 802)
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Enemy" parent="." instance=ExtResource("2_tt8ye")]
+visible = false
+position = Vector2(162, 206)
+
+[node name="EnemyGroup" parent="." instance=ExtResource("3_l2cug")]
+position = Vector2(52, 645)
+padding = 5
+
+[connection signal="timeout" from="ShotTimer" to="Player" method="_on_shot_timer_timeout"]

@@ -7,7 +7,7 @@
 size = Vector2(2, 6)
 
 [node name="Projectile" type="Area2D"]
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 script = ExtResource("1_7y1dj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

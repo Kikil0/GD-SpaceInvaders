@@ -2,6 +2,7 @@ extends Area2D
 @export var SPEED = 1000
 var _projectile
 var screen_size
+var state = "Free"
 
 signal hit
 
@@ -24,11 +25,15 @@ func _process(delta):
 		velocity = velocity * SPEED
 	
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
+	position = position.clamp(Vector2.ZERO+Vector2(15,0), screen_size-Vector2(15,0))
 	
-	if (Input.is_action_pressed("shoot")):
+	if (Input.is_action_pressed("shoot") and state == "Free"):
+		$"../ShotTimer".start()
+		state = "Shooting"
 		var projectile = _projectile.instantiate()
-		get_tree().root.add_child(projectile)
-		print("shot")
-		projectile.SetPosition($Marker2D.position)
+		projectile.SetPosition($Marker2D.global_position)
+		get_tree().root.get_node("Main").add_sibling(projectile)
 		
+func _on_shot_timer_timeout():
+	state = "Free"
+	$"../ShotTimer".stop()
