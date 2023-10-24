@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw6vrlj0pwinr"]
+
+[ext_resource type="PackedScene" uid="uid://dff3lu066lwnn" path="res://Scenes/player.tscn" id="1_x16qq"]
+[ext_resource type="PackedScene" uid="uid://dkw4nqnct08k1" path="res://Scenes/Enemy.tscn" id="2_tt8ye"]
+[ext_resource type="PackedScene" uid="uid://deis1asmxsxav" path="res://Scenes/enemy_group.tscn" id="3_l2cug"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xogab"]
+size = Vector2(20, 872)
+
+[node name="Main" type="Node2D"]
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Enemy" parent="." instance=ExtResource("2_tt8ye")]
+position = Vector2(93, 5.00002)
+
+[node name="Player" parent="." instance=ExtResource("1_x16qq")]
+position = Vector2(196, 801)
+
+[node name="EnemyGroup" parent="." instance=ExtResource("3_l2cug")]
+position = Vector2(192, 83)
+
+[node name="Wall_left" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_left"]
+position = Vector2(0, 426)
+shape = SubResource("RectangleShape2D_xogab")
+
+[node name="Wall_right" type="Area2D" parent="."]
+position = Vector2(393, 2.08165e-12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_right"]
+position = Vector2(0, 426)
+shape = SubResource("RectangleShape2D_xogab")
+
+[connection signal="area_entered" from="Wall_left" to="EnemyGroup" method="_on_wall_left_area_entered"]
+[connection signal="area_entered" from="Wall_right" to="EnemyGroup" method="_on_wall_right_area_entered"]
