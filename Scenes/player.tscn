@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dff3lu066lwnn"]
+[gd_scene load_steps=6 format=3 uid="uid://dff3lu066lwnn"]
 
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_q5nu5"]
 [ext_resource type="Texture2D" uid="uid://cihatnjg04afn" path="res://Art/SpaceShooterAssetPack_Ships.png" id="1_vk2do"]
+[ext_resource type="Script" path="res://Scenes/shooting.gd" id="3_wokxx"]
+[ext_resource type="PackedScene" uid="uid://cdwvqdsuwa7sf" path="res://Scenes/projectile.tscn" id="4_ysenf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_el70o"]
 size = Vector2(8, 8)
@@ -21,4 +23,10 @@ frame = 1
 shape = SubResource("RectangleShape2D_el70o")
 
 [node name="Marker2D" type="Marker2D" parent="."]
+visible = false
 position = Vector2(2.08165e-12, -5)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(2.08165e-12, -5)
+script = ExtResource("3_wokxx")
+projectile_scene = ExtResource("4_ysenf")

@@ -26,14 +26,3 @@ func _process(delta):
 	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO+Vector2(15,0), screen_size-Vector2(15,0))
-	
-	if (Input.is_action_pressed("shoot") and state == "Free"):
-		$"../ShotTimer".start()
-		state = "Shooting"
-		var projectile = _projectile.instantiate()
-		projectile.SetPosition($Marker2D.global_position)
-		get_tree().root.get_node("Main").add_sibling(projectile)
-		
-func _on_shot_timer_timeout():
-	state = "Free"
-	$"../ShotTimer".stop()

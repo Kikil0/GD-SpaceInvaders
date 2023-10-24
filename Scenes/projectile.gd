@@ -1,4 +1,7 @@
 extends Area2D
+
+class_name Projectile
+
 var PROJECTILE_SPEED = 400
 var initial_position: Vector2
 var screen_size
@@ -16,4 +19,4 @@ func _process(delta):
 
 func SetPosition(pos):
 	initial_position = pos
-	
+
