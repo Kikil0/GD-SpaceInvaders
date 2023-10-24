@@ -6,3 +6,6 @@
 [node name="EnemyGroup" type="Node2D"]
 script = ExtResource("1_g0tux")
 MobScene = ExtResource("2_jy2o1")
+
+[node name="MovementTimer" type="Timer" parent="."]
+wait_time = 0.25
