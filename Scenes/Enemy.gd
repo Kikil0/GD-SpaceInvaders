@@ -5,13 +5,13 @@ signal died
 
 @export var width : int
 @export var height : int
+@export var points: int
 
 # Timer to delay the queue_free for the enemy
 var destroy_timer : Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	##Create a Shot Timer
 	destroy_timer = Timer.new()
 	destroy_timer.one_shot = true
@@ -25,5 +25,5 @@ func _process(delta):
 func _on_area_entered(area):
 	if area is Projectile:
 		area.queue_free()
-		died.emit()
+		died.emit(points)
 		queue_free()
