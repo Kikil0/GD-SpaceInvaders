@@ -14,7 +14,6 @@ func _ready():
 
 func _input(event):
 	if Input.is_action_pressed("shoot") && state == "NotShooting":
-		print("shot")
 		var projectile = projectile_scene.instantiate() as Projectile
 		projectile.SetPosition(get_parent().global_position - Vector2 (0,20))
 		get_tree().root.get_node("Main").add_child(projectile)
