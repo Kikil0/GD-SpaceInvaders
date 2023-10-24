@@ -25,5 +25,6 @@ func _process(delta):
 func _on_area_entered(area):
 	if area is Projectile:
 		area.queue_free()
+		$CollisionShape2D.set_deferred("disabled", true)
 		died.emit(points)
 		queue_free()

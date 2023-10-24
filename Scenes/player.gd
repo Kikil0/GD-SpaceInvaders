@@ -8,6 +8,7 @@ signal hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	hide()
 	screen_size = get_viewport_rect().size
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,3 +26,11 @@ func _process(delta):
 	
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO+Vector2(15,0), screen_size-Vector2(15,0))
+	
+func start(pos):
+	position = pos
+	show()
+	$CollisionShape2D.disabled = false
+	
+func _on_main_gameover():
+	hide()

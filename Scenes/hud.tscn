@@ -6,24 +6,144 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_trewe")
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="TitleScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleMessage" type="Label" parent="TitleScreen"]
 texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 100.0
+offset_right = 940.0
+offset_bottom = 300.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 96
+text = "Space Invaders Clone
+By: Kikilo (Osvaldo)"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="StartGame" type="Button" parent="TitleScreen"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 437.0
+offset_right = 341.001
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 48
+text = "Start Game"
+
+[node name="SettingsButton" type="Button" parent="TitleScreen"]
+layout_mode = 0
+offset_left = 386.0
+offset_top = 437.0
+offset_right = 586.001
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 48
+text = "Settings"
+
+[node name="ControlsButton" type="Button" parent="TitleScreen"]
+layout_mode = 0
+offset_left = 655.0
+offset_top = 437.0
+offset_right = 855.001
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 48
+text = "Controls"
+
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 170.0
+offset_top = 35.0
+offset_right = -185.0
+offset_bottom = -215.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="SettingsTitle" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 96
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HBoxSound" type="HSplitContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer/HBoxSound"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 72
+text = "Sound Level: "
+
+[node name="HSlider" type="HSlider" parent="Settings/VBoxContainer/HBoxSound"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 20.0
+
+[node name="SettingsExit" type="Button" parent="Settings"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 437.0
+offset_right = 593.0
+offset_bottom = 512.0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 48
+text = "Apply Settings"
+
+[node name="Main" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreLabel" type="Label" parent="Main"]
+texture_filter = 1
+layout_mode = 0
 offset_left = 25.0
 offset_top = 25.0
-offset_right = 217.0
+offset_right = 283.0
 offset_bottom = 104.0
 theme_override_fonts/font = ExtResource("1_351p0")
 theme_override_font_sizes/font_size = 96
 text = "SCORE: 0"
 
-[node name="MessageLabel" type="Label" parent="."]
+[node name="MessageLabel" type="Label" parent="Main"]
 texture_filter = 1
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -480.0
+offset_left = -20.0
 offset_top = 180.0
-offset_right = 480.0
+offset_right = 940.0
 offset_bottom = 496.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1_351p0")
@@ -32,3 +152,136 @@ text = "Well, done!
 You win!"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="WinPlayAgainButton" type="Button" parent="Main"]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 367.0
+offset_right = 433.0
+offset_bottom = 442.0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 48
+text = "Play Again"
+
+[node name="WinTitleScreenButton" type="Button" parent="Main"]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 367.0
+offset_right = 761.0
+offset_bottom = 442.0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 48
+text = "To Title Screen"
+
+[node name="GameOver" type="Control" parent="Main"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RetryButton" type="Button" parent="Main/GameOver"]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 347.0
+offset_right = 433.0
+offset_bottom = 422.0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 48
+text = "Retry"
+
+[node name="TitleScreenButton" type="Button" parent="Main/GameOver"]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 347.0
+offset_right = 716.0
+offset_bottom = 422.0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 48
+text = "To Title Screen"
+
+[node name="Controls" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="SettingsExit2" type="Button" parent="Controls"]
+layout_mode = 2
+offset_left = 318.5
+offset_top = 437.0
+offset_right = 641.5
+offset_bottom = 512.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 48
+text = "Back to Title Screen"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -166.0
+offset_top = 100.0
+offset_right = 166.0
+offset_bottom = 243.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="ControlsTitle" type="Label" parent="Controls/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 96
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="HBoxActions" type="HSplitContainer" parent="Controls/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="Move Player" type="Label" parent="Controls/VBoxContainer/HBoxActions"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 72
+text = "Move Player:"
+
+[node name="Label2" type="Label" parent="Controls/VBoxContainer/HBoxActions"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 72
+text = "Arrow Keys"
+
+[node name="HBoxActions2" type="HSplitContainer" parent="Controls/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="Action" type="Label" parent="Controls/VBoxContainer/HBoxActions2"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 72
+text = "Shoot Projectile:"
+
+[node name="Control" type="Label" parent="Controls/VBoxContainer/HBoxActions2"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 72
+text = "Shift"
+
+[connection signal="pressed" from="TitleScreen/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="TitleScreen/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="TitleScreen/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="value_changed" from="Settings/VBoxContainer/HBoxSound/HSlider" to="." method="_on_sound_volume_changed"]
+[connection signal="pressed" from="Settings/SettingsExit" to="." method="_on_settings_exit_pressed"]
+[connection signal="pressed" from="Main/WinPlayAgainButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Main/WinTitleScreenButton" to="." method="_on_title_screen_button_pressed"]
+[connection signal="pressed" from="Main/GameOver/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Main/GameOver/TitleScreenButton" to="." method="_on_title_screen_button_pressed"]
+[connection signal="pressed" from="Controls/SettingsExit2" to="." method="_on_settings_exit_pressed"]

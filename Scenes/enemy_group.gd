@@ -15,6 +15,7 @@ const ENEMY_Y_INCREMENT = 10
 var enemy_count = COLUMNS*ROWS
 var movement_direction = 1
 var time_decrement
+var initial_movement_wait_timer
 
 #Signals
 signal enemy_died
@@ -22,7 +23,10 @@ signal all_enemies_dead
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	## Arrange the mobs in an array
+	pass
+	
+	
+func BeginSpawn():
 	var enemy = MobScene.instantiate() as Enemy
 	for row in ROWS:
 		var row_width = (COLUMNS * enemy.width * 3) + ((COLUMNS-1)*HORIZONTAL_SPACING)
@@ -37,8 +41,15 @@ func _ready():
 			spawn_enemy(enemy, spawn_position)
 	
 	$MovementTimer.start()
+	initial_movement_wait_timer = $MovementTimer.wait_time
 	$MovementTimer.connect("timeout", move_enemies)
 	time_decrement = $MovementTimer.wait_time/enemy_count
+
+func start(pos):
+	enemy_count = COLUMNS*ROWS
+	position = pos
+	show()
+	BeginSpawn()
 
 #Spawn Enemy Function
 func spawn_enemy(enemy_scene, spawn_position: Vector2):
@@ -65,10 +76,16 @@ func _on_enemy_died(points):
 	$MovementTimer.wait_time -= time_decrement
 	enemy_died.emit(points)
 	if enemy_count == 0: ##Better here than on _process to avoid comparisons in each frame!
+		reset_move_timer()
 		all_enemies_dead.emit()
 
 func _process(delta):
 	pass
 
 func _on_gameover():
-	queue_free()
+	reset_move_timer()
+	hide()
+	get_tree().call_group("Enemies", "queue_free")
+
+func reset_move_timer():
+	$MovementTimer.wait_time = initial_movement_wait_timer
