@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccxisjyiddss0"]
+
+[ext_resource type="FontFile" uid="uid://v72ohe5iuafl" path="res://FONTS/m5x7.ttf" id="1_351p0"]
+[ext_resource type="Script" path="res://Scenes/hud.gd" id="1_trewe"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_trewe")
+
+[node name="ScoreLabel" type="Label" parent="."]
+texture_filter = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 217.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 96
+text = "SCORE: 0"
+
+[node name="MessageLabel" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -480.0
+offset_top = 180.0
+offset_right = 480.0
+offset_bottom = 496.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_351p0")
+theme_override_font_sizes/font_size = 96
+text = "Well, done! 
+You win!"
+horizontal_alignment = 1
+autowrap_mode = 2
