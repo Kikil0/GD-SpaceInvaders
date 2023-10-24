@@ -1,39 +1,78 @@
-[gd_scene load_steps=5 format=3 uid="uid://cw6vrlj0pwinr"]
+[gd_scene load_steps=8 format=3 uid="uid://cw6vrlj0pwinr"]
 
+[ext_resource type="Script" path="res://Scenes/levelmanager.gd" id="1_wi137"]
 [ext_resource type="PackedScene" uid="uid://dff3lu066lwnn" path="res://Scenes/player.tscn" id="1_x16qq"]
-[ext_resource type="PackedScene" uid="uid://dkw4nqnct08k1" path="res://Scenes/Enemy.tscn" id="2_tt8ye"]
 [ext_resource type="PackedScene" uid="uid://deis1asmxsxav" path="res://Scenes/enemy_group.tscn" id="3_l2cug"]
+[ext_resource type="PackedScene" uid="uid://ccxisjyiddss0" path="res://Scenes/hud.tscn" id="4_je03m"]
+[ext_resource type="AudioStream" uid="uid://8ynnbqf4pjar" path="res://Sound/n-Dimensions (Main Theme - Retro Ver.mp3" id="5_80ljk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xogab"]
 size = Vector2(20, 872)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0rmc"]
+size = Vector2(989, 22)
+
 [node name="Main" type="Node2D"]
+script = ExtResource("1_wi137")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -17.0
+offset_top = -14.0
+offset_right = 970.0
+offset_bottom = 554.0
+color = Color(0.0784314, 0.192157, 0.196078, 1)
 
 [node name="ShotTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
-[node name="Enemy" parent="." instance=ExtResource("2_tt8ye")]
-position = Vector2(93, 5.00002)
-
 [node name="Player" parent="." instance=ExtResource("1_x16qq")]
-position = Vector2(196, 801)
+position = Vector2(191, 504)
 
 [node name="EnemyGroup" parent="." instance=ExtResource("3_l2cug")]
-position = Vector2(192, 83)
+position = Vector2(400, 120)
 
 [node name="Wall_left" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_left"]
-position = Vector2(0, 426)
+position = Vector2(-18, 428)
 shape = SubResource("RectangleShape2D_xogab")
 
 [node name="Wall_right" type="Area2D" parent="."]
-position = Vector2(393, 2.08165e-12)
+position = Vector2(960, 2.08165e-12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall_right"]
-position = Vector2(0, 426)
+position = Vector2(20, 427)
 shape = SubResource("RectangleShape2D_xogab")
 
+[node name="EnemyGoal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyGoal"]
+position = Vector2(480.5, 485)
+shape = SubResource("RectangleShape2D_w0rmc")
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(480, 500)
+
+[node name="StartPositionEnemies" type="Marker2D" parent="."]
+position = Vector2(400, 120)
+
+[node name="HUD" parent="." instance=ExtResource("4_je03m")]
+
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_80ljk")
+volume_db = -20.0
+
+[connection signal="gameover" from="." to="Player" method="_on_main_gameover"]
+[connection signal="gameover" from="." to="EnemyGroup" method="_on_gameover"]
+[connection signal="init_settings" from="." to="HUD" method="_on_main_init_settings"]
+[connection signal="all_enemies_dead" from="EnemyGroup" to="." method="_on_enemy_group_all_enemies_dead"]
+[connection signal="enemy_died" from="EnemyGroup" to="." method="_on_enemy_died"]
 [connection signal="area_entered" from="Wall_left" to="EnemyGroup" method="_on_wall_left_area_entered"]
 [connection signal="area_entered" from="Wall_right" to="EnemyGroup" method="_on_wall_right_area_entered"]
+[connection signal="area_entered" from="EnemyGoal" to="." method="_on_enemy_goal_area_entered"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="stop_music" from="HUD" to="." method="_stop_music"]
+[connection signal="volume_change" from="HUD" to="." method="_on_hud_volume_change"]
